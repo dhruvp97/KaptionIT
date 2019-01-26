@@ -39,4 +39,4 @@ def detect_web(path):
             print(u'\tDescription: {}'.format(entity.description))
 
 # Driver
-main('resources\k2.jpg')
+main('resources/k2.jpg')

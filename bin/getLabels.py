@@ -33,4 +33,4 @@ def detect_label(path):
         print(label.description)
 
 # Driver
-main('resources\k2.jpg')
+main('resources/k2.jpg')
