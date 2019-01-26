@@ -1,0 +1,33 @@
+{
+    "labels":[
+    {
+        "food":
+            {
+              "starting": [
+                  { "line": "I love "
+                  }, {
+                    "line": "I like "
+                  }, {
+                    "line": "This is some nice "
+                  }, {
+                    "line": "This is some tasty "
+                  }, {
+                    "line": "Must try this "
+                  }
+                ],
+              "object": "",
+              "ending": [
+                  { "line": "!"
+                  }, {
+                    "line": "."
+                  }, {
+                    "line": "..."
+                  }, {
+                    "line": "!!!"
+                  }, {
+                    "line": "<3"
+                  }
+                ]
+            }
+    }]
+}
