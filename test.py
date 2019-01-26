@@ -4,7 +4,54 @@ import os
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
+import bin.getWebEntities as webE
 
+
+def main(fileName): 
+    w1 = webE.getWebEntities(fileName)
+    bestLabel = w1.detect_web('Best guess label')
+    print('Best Guess Label >> ' + bestLabel)
+
+# Driver
+main('resources/k2.jpg')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 def main(fileName):
     # Instantiates a client
     client = vision.ImageAnnotatorClient()
@@ -32,7 +79,9 @@ def main(fileName):
         print(label.description)
 
     detect_web(fileName)
+'''
 
+'''
 # Web Entities Results
 def detect_web(path):
     from google.cloud import vision
@@ -57,6 +106,5 @@ def detect_web(path):
         for entity in annotations.web_entities:
             print('\n\tScore      : {}'.format(entity.score))
             print(u'\tDescription: {}'.format(entity.description))
+'''
 
-# Driver
-main('resources\k2.jpg')
