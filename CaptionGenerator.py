@@ -10,7 +10,8 @@ from google.cloud import vision
 from google.cloud.vision import types
 
 
-def main(fileName): 
+
+def generate(fileName, numberOfQuotes): 
     w1 = webE.getWebEntities(fileName)
     bestEntity, entityScore = w1.detect_web('Find web entities')
     #bestLabel = w1.detect_web('Best guess label')
@@ -24,11 +25,13 @@ def main(fileName):
         print(quote)
     '''
     quoteSet = quoteSetA + quoteSetB
-    q = NLAnalysis(bestEntity, entityScore, quoteSet, 5)
-    for quote in q: 
-        print(quote)
+    q = NLAnalysis(bestEntity, entityScore, quoteSet, numberOfQuotes)
+    return q
+    #for quote in q: 
+    #    print(quote)
 # Driver
-main('resources/images/friends.jpg')
+
+#main('resources/images/friends.jpg')
 
 
 
