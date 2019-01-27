@@ -20,10 +20,10 @@
   </form>
 </header> -->
 <!-- <img src="{{user_image}}" class="responsive" alt="User Image"> -->
-<!-- <div>{{image_text}}</div> -->
 {{ dropzone.create(action_view='index') }}
 {% for file_url in file_urls %}
 <img src="{{ file_url }}">
+<div class="quoteCls">{{image_text}}</div>
 {% endfor %}
 </body>
 </html>

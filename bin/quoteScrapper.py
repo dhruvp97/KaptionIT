@@ -31,7 +31,7 @@ def getQuoteSetA(object, toleranceLevel):
     count  = 0
     raw_html = simple_get('https://www.brainyquote.com/search_results?q='+ object)
     html = BeautifulSoup(raw_html, 'html.parser')
-    #print('Result >>')         
+    #print('Result >>')
     for i, link in enumerate(html.select('a')):
         if link.get('title') == 'view quote':
             sizeOfText = len(link.text)
@@ -46,13 +46,13 @@ def getQuoteSetA(object, toleranceLevel):
 def getQuoteSetB(object, toleranceLevel):
     setB = []
     count = 0
-    parse = jparser.jsonParser('resources/MainCaption.json')
+    parse = jparser.jsonParser('../resources/MainCaption.json')
     HttpLinks = parse.extract(object)
-    for link in HttpLinks: 
+    for link in HttpLinks:
         raw_html = simple_get(link)
         html = BeautifulSoup(raw_html, 'html.parser')
-        for i, link in enumerate(html.select('ul' and 'li')):          
-            if not link.select('a'): 
+        for i, link in enumerate(html.select('ul' and 'li')):
+            if not link.select('a'):
                 sizeOfText = len(link.text)
                 if sizeOfText > 0 and sizeOfText < toleranceLevel:
                     setB.append(link.text)
@@ -61,4 +61,3 @@ def getQuoteSetB(object, toleranceLevel):
         return getQuoteSetB(object, toleranceLevel + 10)
     else:
         return setB
-                

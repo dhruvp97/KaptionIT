@@ -15,3 +15,11 @@ img {
   border-radius: 2%;
   border-color: #ff3d37
 }
+.quoteCls{
+  height: 15%;
+  font-size: x-large;
+  font-family: sans-serif;
+  color: white;
+  padding: 2%;
+  text-align: center;
+}
