@@ -1,6 +1,7 @@
 import io
 import os
-from bin.quoteScrapper import getQuote
+from bin.quoteScrapper import getQuoteSetA
+from bin.quoteScrapper import getQuoteSetB
 import bin.getWebEntities as webE
 
 # Imports the Google Cloud client library
@@ -13,10 +14,10 @@ def main(fileName):
     bestEntity = w1.detect_web('Find web entities')
     #bestLabel = w1.detect_web('Best guess label')
     print('Best Guessed Entity >> ' + bestEntity)
-    getQuote(bestEntity, 150) 
-
+    getQuoteSetA(bestEntity, 150) 
+    getQuoteSetB(bestEntity)
 # Driver
-main('resources/images/sunset.jpg')
+main('resources/images/friends.jpg')
 
 
 

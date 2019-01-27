@@ -2,6 +2,7 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
+import bin.jsonParser as jparser
 
 def simple_get(url):
     try:
@@ -24,12 +25,12 @@ def is_good_response(resp):
             and content_type is not None
             and content_type.find('html') > -1)
 
-def getQuote(object, toleranceLevel):
+def getQuoteSetA(object, toleranceLevel):
     object = object.replace(' ', '+')
     count  = 0
-    raw_html = simple_get('https://www.brainyquote.com/search_results?q='+object)
+    raw_html = simple_get('https://www.brainyquote.com/search_results?q='+ object)
     html = BeautifulSoup(raw_html, 'html.parser')
-    #print('Result >>')
+    #print('Result >>')         
     for i, link in enumerate(html.select('a')):
         if link.get('title') == 'view quote':
             sizeOfText = len(link.text)
@@ -37,6 +38,21 @@ def getQuote(object, toleranceLevel):
                 print(i, link.text)
                 count = count + 1
     if count == 0:
-        return getQuote(object, toleranceLevel + 1)
+        return getQuoteSetA(object, toleranceLevel + 1)
     else:
         return
+
+def getQuoteSetB(object):
+    object = object.replace(' ', '+')
+    #count  = 0
+    parse = jparser.jsonParser('resources/MainCaption.json')
+    HttpLinks = parse.extract(object)
+    #print(HttpLinks)
+    for link in HttpLinks: 
+        #print(link)
+        raw_html = simple_get(link)
+        html = BeautifulSoup(raw_html, 'html.parser')
+        #print('Result >>')         
+        for i, link in enumerate(html.select('ul' and 'li')):          
+            if not link.select('a'): 
+                print(i, link.text)
