@@ -5,38 +5,47 @@ import os
 from google.cloud import vision
 from google.cloud.vision import types
 
-def main(fileName):
-    # The name of the image file to annotate
-    file_name = os.path.join(
-        os.path.dirname(__file__),
-        fileName)
+class getWebEntities: 
+    def __init__(self, fileName):
+        self.fileName = fileName 
 
-    detect_web(fileName)
+    # Web Entities Results
+    def detect_web(self, option):
+        # The name of the image file to annotate
+        path = self.fileName 
 
-# Web Entities Results
-def detect_web(path):
-    # Instantiates a client
-    client = vision.ImageAnnotatorClient()
+        file_name = os.path.join(
+            os.path.dirname(__file__),
+            self.fileName)
 
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+        # Instantiates a client
+        client = vision.ImageAnnotatorClient()
 
-    image = vision.types.Image(content=content)
+        with io.open(path, 'rb') as image_file:
+            content = image_file.read()
 
-    response = client.web_detection(image=image)
-    annotations = response.web_detection
+        image = vision.types.Image(content=content)
 
-    if annotations.best_guess_labels:
-        for label in annotations.best_guess_labels:
-            print('\nBest guess label: {}'.format(label.label))
+        response = client.web_detection(image=image)
+        annotations = response.web_detection
 
-    if annotations.web_entities:
-        print('\n{} Web entities found: '.format(
-            len(annotations.web_entities)))
+        if option == 'Best guess label': 
+            if annotations.best_guess_labels:
+                for label in annotations.best_guess_labels:
+                    #print('\nBest guess label: {}'.format(label.label))
+                    return label.label
+                    
 
-        for entity in annotations.web_entities:
-            print('\n\tScore      : {}'.format(entity.score))
-            print(u'\tDescription: {}'.format(entity.description))
+        if option == 'Find web entities': 
+            bestEntity = ' '
+            if annotations.web_entities:
+                #print('\n{} Web entities found: '.format(
+                #    len(annotations.web_entities)))
 
-# Driver
-main('resources\k2.jpg')
+                bestEntity = annotations.web_entities[0].description
+
+            #for entity in annotations.web_entities:
+            #    if entity.score > highScore
+                #print('\n\tScore      : {}'.format(entity.score))
+                #print(u'\tDescription: {}'.format(entity.description))
+            return bestEntity

@@ -1,10 +1,60 @@
 import io
 import os
+from bin.quoteScrapper import getQuote
+import bin.getWebEntities as webE
 
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
 
+
+def main(fileName): 
+    w1 = webE.getWebEntities(fileName)
+    bestEntity = w1.detect_web('Find web entities')
+    #bestLabel = w1.detect_web('Best guess label')
+    print('Best Guessed Entity >> ' + bestEntity)
+    getQuote(bestEntity, 150) 
+
+# Driver
+main('resources/images/pasta.jpg')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 def main(fileName):
     # Instantiates a client
     client = vision.ImageAnnotatorClient()
@@ -32,7 +82,9 @@ def main(fileName):
         print(label.description)
 
     detect_web(fileName)
+'''
 
+'''
 # Web Entities Results
 def detect_web(path):
     from google.cloud import vision
@@ -57,6 +109,5 @@ def detect_web(path):
         for entity in annotations.web_entities:
             print('\n\tScore      : {}'.format(entity.score))
             print(u'\tDescription: {}'.format(entity.description))
+'''
 
-# Driver
-main('resources\k2.jpg')
