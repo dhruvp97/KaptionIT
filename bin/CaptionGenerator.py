@@ -31,10 +31,7 @@ def generate(fileName, numberOfQuotes):
     #    print(quote)
 # Driver
 
-print(generate('resources/images/friends.jpg', 5))
-
-
-
+print(generate('resources/images/pasta.jpg', 5))
 
 
 

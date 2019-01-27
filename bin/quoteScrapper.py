@@ -46,9 +46,9 @@ def getQuoteSetA(object, toleranceLevel):
 def getQuoteSetB(object, toleranceLevel):
     setB = []
     count = 0
-    parse = jparser.jsonParser('resources/MainCaption.json')
+    parse = jparser.jsonParser('/MainCaption.json')
     HttpLinks = parse.extract(object)
-    for link in HttpLinks: 
+    for link in HttpLinks:
         raw_html = simple_get(link)
         html = BeautifulSoup(raw_html, 'html.parser')
         for i, link in enumerate(html.select('ul' and 'li')):          
