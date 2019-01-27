@@ -25,7 +25,8 @@ def main(fileName):
     '''
     quoteSet = quoteSetA + quoteSetB
     q = NLAnalysis(bestEntity, entityScore, quoteSet, 5)
-    print(q)
+    for quote in q: 
+        print(quote)
 # Driver
 main('resources/images/winter.jpg')
 
