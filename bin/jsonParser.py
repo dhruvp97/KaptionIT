@@ -6,12 +6,14 @@ class jsonParser:
         self.fileName = fileName 
 
     def extract(self, readLabel):
+        setFound = False
         HttpLink = [] 
         with open(self.fileName, 'r') as jsonIn:
             data_dict = json.load(jsonIn)
             #print(data_dict)
         for label in data_dict['labels']: 
-            if label['id'] == readLabel:
+            if label['id'] == readLabel or (label['id'] == 'Extra' and setFound == False):
+                setFound = True
                 for link in label['caption']:
                     a = len(link)
                     if a == 1:  
