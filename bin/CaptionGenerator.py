@@ -1,9 +1,9 @@
 import io
 import os
-from bin.quoteScrapper import getQuoteSetA
-from bin.quoteScrapper import getQuoteSetB
-import bin.getWebEntities as webE
-from bin.getNaturalLanguage import NLAnalysis
+from quoteScrapper import getQuoteSetA
+from quoteScrapper import getQuoteSetB
+import getWebEntities as webE
+from getNaturalLanguage import NLAnalysis
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -31,7 +31,7 @@ def generate(fileName, numberOfQuotes):
     #    print(quote)
 # Driver
 
-#main('resources/images/friends.jpg')
+print(generate('resources/images/friends.jpg', 5))
 
 
 

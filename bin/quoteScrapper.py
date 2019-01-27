@@ -2,7 +2,7 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
-import bin.jsonParser as jparser
+import jsonParser as jparser
 
 def simple_get(url):
     try:
