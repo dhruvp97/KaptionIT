@@ -38,8 +38,8 @@ def getQuoteSetA(object, toleranceLevel):
             if sizeOfText > 0 and sizeOfText < toleranceLevel:
                 setA.append(link.text)
                 count = count + 1
-    if count == 0:
-        return getQuoteSetA(object, toleranceLevel + 1)
+    if count == 0 and toleranceLevel < 175:
+        return getQuoteSetA(object, toleranceLevel + 10)
     else:
         return setA
 
@@ -57,8 +57,8 @@ def getQuoteSetB(object, toleranceLevel):
                 if sizeOfText > 0 and sizeOfText < toleranceLevel:
                     setB.append(link.text)
                     count = count + 1
-    if count == 0:
-        return getQuoteSetB(object, toleranceLevel + 1)
+    if count == 0 and toleranceLevel < 175:
+        return getQuoteSetB(object, toleranceLevel + 10)
     else:
         return setB
                 

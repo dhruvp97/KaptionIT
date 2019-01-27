@@ -28,7 +28,7 @@ def main(fileName):
     for quote in q: 
         print(quote)
 # Driver
-main('resources/images/winter.jpg')
+main('resources/images/friends.jpg')
 
 
 
