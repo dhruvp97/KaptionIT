@@ -24,6 +24,14 @@ def is_good_response(resp):
             and content_type is not None
             and content_type.find('html') > -1)
 
+<<<<<<< HEAD
+def getQuote(object):
+    raw_html = simple_get('https://www.brainyquote.com/search_results?q='+object)
+    html = BeautifulSoup(raw_html, 'html.parser')
+    for i, link in enumerate(html.select('a')):
+        if link.get('title') == 'view quote':
+            print(i, link.text)
+=======
 def getQuote(object, toleranceLevel):
     object = object.replace(' ', '+')
     count  = 0
@@ -40,3 +48,4 @@ def getQuote(object, toleranceLevel):
         return getQuote(object, toleranceLevel + 1)
     else:
         return
+>>>>>>> master
