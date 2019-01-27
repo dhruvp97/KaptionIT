@@ -3,6 +3,7 @@ import os
 from bin.quoteScrapper import getQuoteSetA
 from bin.quoteScrapper import getQuoteSetB
 import bin.getWebEntities as webE
+from bin.getNaturalLanguage import NLAnalysis
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -11,13 +12,22 @@ from google.cloud.vision import types
 
 def main(fileName): 
     w1 = webE.getWebEntities(fileName)
-    bestEntity = w1.detect_web('Find web entities')
+    bestEntity, entityScore = w1.detect_web('Find web entities')
     #bestLabel = w1.detect_web('Best guess label')
-    print('Best Guessed Entity >> ' + bestEntity)
-    getQuoteSetA(bestEntity, 150) 
-    getQuoteSetB(bestEntity)
+    print('Best Guessed Entity >> ' + bestEntity[0])
+    quoteSetA = getQuoteSetA(bestEntity[0], 150)
+    quoteSetB = getQuoteSetB(bestEntity[0], 150)
+    '''
+    for quote in quoteSetA:
+        print(quote)
+    for quote in quoteSetB: 
+        print(quote)
+    '''
+    quoteSet = quoteSetA + quoteSetB
+    score = NLAnalysis(bestEntity, entityScore, quoteSet)
+    #print(score)
 # Driver
-main('resources/images/friends.jpg')
+main('resources/images/winter.jpg')
 
 
 

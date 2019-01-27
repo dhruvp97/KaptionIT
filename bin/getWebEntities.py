@@ -35,17 +35,22 @@ class getWebEntities:
                     #print('\nBest guess label: {}'.format(label.label))
                     return label.label
                     
-
+        bestEntity = []
+        entityScore = []
         if option == 'Find web entities': 
-            bestEntity = ' '
+            count = 0
             if annotations.web_entities:
                 #print('\n{} Web entities found: '.format(
                 #    len(annotations.web_entities)))
-
-                bestEntity = annotations.web_entities[0].description
+                for entity in annotations.web_entities:
+                    count = count + 1
+                    bestEntity.append(entity.description)
+                    entityScore.append(entity.score) 
+                    if count == 5: 
+                        return bestEntity, entityScore
 
             #for entity in annotations.web_entities:
             #    if entity.score > highScore
                 #print('\n\tScore      : {}'.format(entity.score))
                 #print(u'\tDescription: {}'.format(entity.description))
-            return bestEntity
+        return bestEntity, entityScore

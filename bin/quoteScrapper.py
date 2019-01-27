@@ -26,6 +26,7 @@ def is_good_response(resp):
             and content_type.find('html') > -1)
 
 def getQuoteSetA(object, toleranceLevel):
+    setA = []
     object = object.replace(' ', '+')
     count  = 0
     raw_html = simple_get('https://www.brainyquote.com/search_results?q='+ object)
@@ -35,15 +36,16 @@ def getQuoteSetA(object, toleranceLevel):
         if link.get('title') == 'view quote':
             sizeOfText = len(link.text)
             if sizeOfText > 0 and sizeOfText < toleranceLevel:
-                print(i, link.text)
+                setA.append(link.text)
                 count = count + 1
     if count == 0:
         return getQuoteSetA(object, toleranceLevel + 1)
     else:
-        return
+        return setA
 
-def getQuoteSetB(object):
-    object = object.replace(' ', '+')
+def getQuoteSetB(object, toleranceLevel):
+    setB = []
+    count = 0
     parse = jparser.jsonParser('resources/MainCaption.json')
     HttpLinks = parse.extract(object)
     for link in HttpLinks: 
@@ -51,4 +53,12 @@ def getQuoteSetB(object):
         html = BeautifulSoup(raw_html, 'html.parser')
         for i, link in enumerate(html.select('ul' and 'li')):          
             if not link.select('a'): 
-                print(i, link.text)
+                sizeOfText = len(link.text)
+                if sizeOfText > 0 and sizeOfText < toleranceLevel:
+                    setB.append(link.text)
+                    count = count + 1
+    if count == 0:
+        return getQuoteSetB(object, toleranceLevel + 1)
+    else:
+        return setB
+                
