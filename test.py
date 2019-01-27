@@ -1,19 +1,22 @@
 import io
 import os
+from bin.quoteScrapper import getQuote
+import bin.getWebEntities as webE
 
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
-import bin.getWebEntities as webE
 
 
 def main(fileName): 
     w1 = webE.getWebEntities(fileName)
-    bestLabel = w1.detect_web('Best guess label')
-    print('Best Guess Label >> ' + bestLabel)
+    bestEntity = w1.detect_web('Find web entities')
+    #bestLabel = w1.detect_web('Best guess label')
+    print('Best Guessed Entity >> ' + bestEntity)
+    getQuote(bestEntity, 150) 
 
 # Driver
-main('resources/k2.jpg')
+main('resources/images/pasta.jpg')
 
 
 
