@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Caption Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
     <input type="submit" value="Upload your image" class="btn btn-primary">
   </form>
 </header>
-<img src="{{user_image}}" alt="User Image">
+<img class="contain" src="{{user_image}}" alt="User Image">
 <div>{{image_text}}</div>
 </body>
 </html>

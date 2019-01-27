@@ -1,0 +1,20 @@
+.contain {
+  object-fit: contain;
+}
+
+body, html {
+  height: 100%;
+}
+
+img.bg {
+  /* Full height */
+  height: 100%;
+
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
