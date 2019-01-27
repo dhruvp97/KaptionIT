@@ -4,11 +4,12 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
-def NLAnalysis(bestEntity, entityScore, quoteSet): 
+def NLAnalysis(bestEntity, entityScore, quoteSet, quotesNeeded): 
     # Instantiates a client
     client = language.LanguageServiceClient()
 
     score = []
+    finalQuotes = []
     for quote in quoteSet: 
         # The text to analyze
         #print(quote)
@@ -45,6 +46,18 @@ def NLAnalysis(bestEntity, entityScore, quoteSet):
             #   entity.metadata.get('wikipedia_url', '-')))
             #print(u'{:<16}: {}'.format('mid', entity.metadata.get('mid', '-')))
         
-        print(totalScore)
+        #print(totalScore)
         score.append(totalScore)
-    return score    
+
+    combined_result = {}
+    count = 0
+    for quote in quoteSet: 
+        combined_result[quote] = score[count]
+        count = count + 1
+    #print(combined_result)
+    sortedResults = sorted(combined_result.items(), key = lambda x: x[1], reverse = True)
+    #print(sortedResults)
+    finalQuotes = []
+    for index in range (0, quotesNeeded): 
+        finalQuotes.append(sortedResults[index][0]) 
+    return finalQuotes    
