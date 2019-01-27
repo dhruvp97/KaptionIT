@@ -33,9 +33,9 @@ def getQuote(object, toleranceLevel):
     for i, link in enumerate(html.select('a')):
         if link.get('title') == 'view quote':
             sizeOfText = len(link.text)
-            if sizeOfText > 0 and sizeOfText < toleranceLevel: 
+            if sizeOfText > 0 and sizeOfText < toleranceLevel:
                 print(i, link.text)
-                count = count + 1  
+                count = count + 1
     if count == 0:
         return getQuote(object, toleranceLevel + 1)
     else:
