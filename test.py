@@ -16,7 +16,7 @@ def main(fileName):
     getQuote(bestEntity, 150) 
 
 # Driver
-main('resources/images/pasta.jpg')
+main('resources/images/sunset.jpg')
 
 
 
@@ -83,31 +83,3 @@ def main(fileName):
 
     detect_web(fileName)
 '''
-
-'''
-# Web Entities Results
-def detect_web(path):
-    from google.cloud import vision
-    client = vision.ImageAnnotatorClient()
-
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
-
-    image = vision.types.Image(content=content)
-
-    response = client.web_detection(image=image)
-    annotations = response.web_detection
-
-    if annotations.best_guess_labels:
-        for label in annotations.best_guess_labels:
-            print('\nBest guess label: {}'.format(label.label))
-
-    if annotations.web_entities:
-        print('\n{} Web entities found: '.format(
-            len(annotations.web_entities)))
-
-        for entity in annotations.web_entities:
-            print('\n\tScore      : {}'.format(entity.score))
-            print(u'\tDescription: {}'.format(entity.description))
-'''
-
