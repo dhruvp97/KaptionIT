@@ -28,6 +28,7 @@
 from flask import Flask, redirect, render_template, request, session, url_for
 from flask_dropzone import Dropzone
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+from CaptionGenerator import generate
 
 import os
 
@@ -78,6 +79,10 @@ def results():
     # set the file_urls and remove the session variable
     file_urls = session['file_urls']
     file_url = file_urls[0];
+    file_url_spl = file_url
+    file_url_spl = file_url_spl.split('/')
+    file_lcl = file_url_spl[len(file_url_spl)-1]
     session.pop('file_urls', None)
-
-    return render_template('index.html', file_urls=file_url, image_captions)
+    image_text = generate("uploads/"+file_lcl, 3)
+    print(file_url)
+    return render_template('index.html', file_urls=file_urls, image_text=image_text[0])
