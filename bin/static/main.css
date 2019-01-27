@@ -1,0 +1,17 @@
+body, html {
+  height: 100%;
+  background-color: #212121
+}
+header{
+  height: 10%;
+}
+img {
+  height: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  object-fit: contain;
+  border: 2px solid #ddd;
+  border-radius: 2%;
+  border-color: #ff3d37
+}
